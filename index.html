@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>88x31 Button Generator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    max-width: 600px;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  input[type="text"], select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 1em;
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  textarea {
+    height: 200px;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<h1>88x31 Button HTML Generator</h1>
+
+<label for="redirect">Redirect URL:</label>
+<input type="text" id="redirect" placeholder="https://greekstars.github.io/88x31/" value="https://greekstars.github.io/88x31/" 
+
+<label for="gifurl">GIF Image URL:</label>
+<input type="text" id="gifurl" placeholder="https://cyber.dabamos.de/88x31/learn_html.gif" value="https://cyber.dabamos.de/88x31/learn_html.gif" />
+
+<label for="position">Position:</label>
+<select id="position">
+  <option value="top-left">TOP LEFT</option>
+  <option value="top-middle">TOP MIDDLE</option>
+  <option value="top-right">TOP RIGHT</option>
+  <option value="middle">MIDDLE</option>
+  <option value="bottom-left">BOTTOM LEFT</option>
+  <option value="bottom-middle" selected>BOTTOM MIDDLE</option>
+  <option value="bottom-right">BOTTOM RIGHT</option>
+</select>
+
+<button id="generateBtn">Generate HTML</button>
+
+<label for="output">Generated HTML Code:</label>
+<textarea id="output" readonly></textarea>
+
+<script>
+  const positions = {
+    "top-left":    {top: "10px", left: "10px", bottom: "auto", right: "auto", transform: "none"},
+    "top-middle":  {top: "10px", left: "50%", bottom: "auto", right: "auto", transform: "translateX(-50%)"},
+    "top-right":   {top: "10px", right: "10px", bottom: "auto", left: "auto", transform: "none"},
+    "middle":      {top: "50%", left: "50%", bottom: "auto", right: "auto", transform: "translate(-50%, -50%)"},
+    "bottom-left": {bottom: "10px", left: "10px", top: "auto", right: "auto", transform: "none"},
+    "bottom-middle": {bottom: "10px", left: "50%", top: "auto", right: "auto", transform: "translateX(-50%)"},
+    "bottom-right":{bottom: "10px", right: "10px", top: "auto", left: "auto", transform: "none"}
+  };
+
+  function generateHTML(redirect, gifurl, position) {
+    const pos = positions[position];
+    return `
+    <!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>88x31 Button</title>
+<style>
+  body {
+    margin: 0; padding: 0; height: 100vh; position: relative;
+  }
+  .button-container {
+    position: absolute;
+    top: ${pos.top};
+    bottom: ${pos.bottom};
+    left: ${pos.left};
+    right: ${pos.right};
+    transform: ${pos.transform};
+  }
+</style>
+</head>
+<body>
+  <div class="button-container">
+    <a href="${redirect}" target="_blank" rel="noopener noreferrer">
+      <img src="${gifurl}" alt="https://greekstars.github.io/88x31" width="88" height="31" />
+    </a>
+  </div>
+</body>
+</html>`;
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const redirect = document.getElementById('redirect').value.trim();
+    const gifurl = document.getElementById('gifurl').value.trim();
+    const position = document.getElementById('position').value;
+    if (!redirect || !gifurl) {
+      alert("Please enter both Redirect URL and GIF URL.");
+      return;
+    }
+    const code = generateHTML(redirect, gifurl, position);
+    document.getElementById('output').value = code;
+  });
+</script>
+
+</body>
+</html>
+
+
+
+    <!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>88x31 Button</title>
+<style>
+  body {
+    margin: 0; padding: 0; height: 100vh; position: relative;
+  }
+  .button-container {
+    position: absolute;
+    top: auto;
+    bottom: 10px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+</style>
+</head>
+<body>
+  <div class="button-container">
+    <a href="https://greekstars.github.io/88x31/" target="_blank" rel="noopener noreferrer">
+      <img src="https://cyber.dabamos.de/88x31/learn_html.gif" alt="https://greekstars.github.io/88x31" width="88" height="31" />
+    </a>
+  </div>
+</body>
+</html>
